@@ -1,25 +1,13 @@
-import React from "react";
-import { Modal, View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import Icon from 'react-native-vector-icons/AntDesign';
+import React from 'react';
+import {useNavigation} from '@react-navigation/native';
+import {View, Text} from 'react-native';
 
 export const FoundItBoard = () => {
-    return (
-        <View style={styles.container}>
-            <Text>물건 찾아주기 게시판</Text>
-            <TouchableOpacity>
-                <Icon name="pluscircleo" size={45} color="#000" />
-            </TouchableOpacity>
-        </View>
-    )
-}
+  const navigation = useNavigation();
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-    },
-    plus: {
-        position: 'absolute',
-        bottom: 20, 
-        right: 20
-    }
-});
+  return (
+    <View>
+      <Text>물건 찾아 주기 게시판</Text>
+    </View>
+  );
+};
