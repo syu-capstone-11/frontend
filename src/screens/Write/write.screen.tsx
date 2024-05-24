@@ -1,47 +1,59 @@
 import React from "react";
-import { Text, TextInput, View, StyleSheet, TouchableOpacity } from 'react-native';
+import { Text, TextInput, View, StyleSheet } from 'react-native';
+import Icon from 'react-native-vector-icons/AntDesign';
 
 export const Write = () => {
     return (
         <View style={style.container}>
-          <Text style={style.write}>글쓰기{'\n'}</Text>
+          <Text style={style.board}>찾아주기</Text>
           <TextInput style={style.title} placeholder="제목"></TextInput>
           <View style={style.horizontalLine}></View>
           <TextInput style={style.content} multiline={true} placeholder="내용"></TextInput>
+          <TextInput style={style.map} placeholder="지도"></TextInput>
         </View>
     );
 };
 
 const style = StyleSheet.create({
     container: {
-        marginTop: 25
+        marginTop: 0
     },
-    write: {
-        fontSize: 25,
-        color: 'black',
-        textAlign: 'center'
+    board: {
+        marginTop: 30,
+        marginLeft: 8,
+        fontSize: 17
     },
     title: {
-        marginLeft: 17,
-        marginTop: 10,
-        fontSize: 25,
+        marginLeft: 7,
+        marginTop: 15,
+        fontSize: 20,
         textAlign: 'left'
     },
     horizontalLine: {
-        width: '95%',
+        width: '97%',
         height: 1,
-        backgroundColor: 'lightgrey',
-        marginLeft: 10,
+        backgroundColor: 'black',
+        marginLeft: 6,
         textAlign: 'center'
     },
     content: {
-        marginTop: 30,
-        marginLeft: 10,
-        fontSize: 20,
+        marginTop: 20,
+        marginLeft: 5,
+        fontSize: 17,
         borderWidth: 1,
         borderColor: 'lightgrey',
-        width: '95%',
-        height: '50%',
+        width: '97%',
+        height: '25%',
+        textAlignVertical: 'top',
+        padding: 13
+    },
+    map: {
+        marginTop: 20,
+        marginLeft: 5,
+        borderWidth: 1,
+        borderColor: 'lightgrey',
+        width: '97%',
+        height: '45%',
         textAlignVertical: 'top',
         padding: 13
     }

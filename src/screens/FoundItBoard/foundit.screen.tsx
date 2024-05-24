@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   Text,
@@ -6,6 +6,8 @@ import {
   TouchableOpacity,
   Modal,
   FlatList,
+  ScrollView,
+  Keyboard,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 import {Write} from '../Write';
@@ -156,17 +158,16 @@ export const FoundItBoard = () => {
         }}>
         <View style={styles.modalContainer}>
           <View style={styles.modalContent}>
-            <Write />
-            <View style={styles.buttonContainer}>
-              <TouchableOpacity
-                style={styles.button}
-                onPress={() => setModalVisible(false)}>
-                <Text>취소</Text>
+            <View style={styles.writeContainer}>
+              <TouchableOpacity onPress={() => setModalVisible(false)} style={styles.arrowIcon}>
+                <Icon name="arrowleft" size={25} color="black" />
               </TouchableOpacity>
-              <TouchableOpacity style={styles.button}>
-                <Text>저장</Text>
+              <Text style={styles.write}>글쓰기</Text>
+              <TouchableOpacity style={styles.complete}>
+                <Text>완료</Text>
               </TouchableOpacity>
             </View>
+            <Write />
           </View>
         </View>
       </Modal>
@@ -175,60 +176,75 @@ export const FoundItBoard = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  item: {
-    backgroundColor: '#f8f8f8',
-    padding: 16,
-    marginVertical: 0,
-    borderRadius: 8,
-    borderColor: '#ddd',
-    borderWidth: 1,
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    marginBottom: 4,
-  },
-  content: {
-    fontSize: 16,
-    marginBottom: 8,
-  },
-  info: {
-    fontSize: 14,
-    color: '#888',
-  },
-  plus: {
-    position: 'absolute',
-    bottom: 20,
-    right: 20,
-  },
-  modalContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-  },
-  modalContent: {
-    backgroundColor: '#fff',
-    padding: 20,
-    borderRadius: 10,
-    elevation: 5,
-    width: '95%',
-  },
-  buttonContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    paddingHorizontal: 10,
-  },
-  button: {
-    width: '48%',
-    height: 50,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: 'lightblue',
-    borderRadius: 5,
-    fontSize: 25,
-  },
+    container: {
+      flex: 1,
+    },
+    item: {
+      backgroundColor: '#f8f8f8',
+      padding: 16,
+      marginVertical: 0,
+      borderRadius: 8,
+      borderColor: '#ddd',
+      borderWidth: 1,
+    },
+    title: {
+      fontSize: 20,
+      fontWeight: 'bold',
+      marginBottom: 4,
+    },
+    writeContainer: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'center'
+    },
+    write: {
+        fontSize: 25,
+        color: 'black',
+        textAlign: 'center',
+    },
+    arrowIcon: {
+        position: 'absolute',
+        top: 9,
+        left: 8,
+        zIndex: 1
+    },
+    complete: {
+        position: 'absolute',
+        fontSize: 18,
+        top: 2,
+        right: 1,
+        borderWidth: 1,
+        borderRadius: 5,
+        paddingLeft: 10,        
+        paddingRight: 9,       
+        paddingTop: 5,
+        paddingBottom: 5  
+    },
+    content: {
+      fontSize: 16,
+      marginBottom: 8,
+    },
+    info: {
+      fontSize: 14,
+      color: '#888',
+    },
+    plus: {
+      position: 'absolute',
+      bottom: 20,
+      right: 20,
+    },
+    modalContainer: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    },
+    modalContent: {
+      backgroundColor: '#fff',
+      padding: 20,
+      borderRadius: 10,
+      elevation: 5,
+      width: '95%',
+      height: '90%'
+    }
 });
