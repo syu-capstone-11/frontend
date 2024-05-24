@@ -1,6 +1,6 @@
 import React from "react";
 import { Text, TextInput, View, StyleSheet } from 'react-native';
-import Icon from 'react-native-vector-icons/AntDesign';
+import MapView, { Marker } from 'react-native-maps';
 
 export const Write = () => {
     return (
@@ -9,7 +9,17 @@ export const Write = () => {
           <TextInput style={style.title} placeholder="제목"></TextInput>
           <View style={style.horizontalLine}></View>
           <TextInput style={style.content} multiline={true} placeholder="내용"></TextInput>
-          <TextInput style={style.map} placeholder="지도"></TextInput>
+          <MapView style={style.map} initialRegion={{
+            latitude: 37.64356956861168,
+            longitude: 127.10636118766595,
+            latitudeDelta: 0.005,
+            longitudeDelta: 0.005
+          }}>
+            <Marker
+              coordinate={{ latitude: 37.64356956861168, longitude: 127.10636118766595 }}
+              title={"삼육대학교"}
+            />
+          </MapView>
         </View>
     );
 };
@@ -37,11 +47,8 @@ const style = StyleSheet.create({
         textAlign: 'center'
     },
     content: {
-        marginTop: 20,
-        marginLeft: 5,
+        marginTop: 10,
         fontSize: 17,
-        borderWidth: 1,
-        borderColor: 'lightgrey',
         width: '97%',
         height: '25%',
         textAlignVertical: 'top',
