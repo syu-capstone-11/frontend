@@ -15,10 +15,6 @@ export const Write = () => {
             latitudeDelta: 0.005,
             longitudeDelta: 0.005
           }}>
-            <Marker
-              coordinate={{ latitude: 37.64356956861168, longitude: 127.10636118766595 }}
-              title={"삼육대학교"}
-            />
           </MapView>
         </View>
     );

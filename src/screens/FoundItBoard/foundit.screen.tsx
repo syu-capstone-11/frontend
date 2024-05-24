@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import {
   View,
   Text,
@@ -6,8 +6,6 @@ import {
   TouchableOpacity,
   Modal,
   FlatList,
-  ScrollView,
-  Keyboard,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 import {Write} from '../Write';
