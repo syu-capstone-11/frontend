@@ -149,7 +149,7 @@ export const FoundItBoard = () => {
                 <Text>완료</Text>
               </TouchableOpacity>
             </View>
-            <Write />
+            <Write boardName='찾아주기' />
           </View>
         </View>
       </Modal>
