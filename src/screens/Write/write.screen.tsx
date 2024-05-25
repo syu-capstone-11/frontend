@@ -1,11 +1,15 @@
 import React from "react";
 import { Text, TextInput, View, StyleSheet } from 'react-native';
-import MapView, { Marker } from 'react-native-maps';
+import MapView from 'react-native-maps';
 
-export const Write = () => {
+interface WriteProps {
+  boardName: string;
+}
+
+export const Write: React.FC<WriteProps> = ({ boardName }) => {
     return (
         <View style={style.container}>
-          <Text style={style.board}>찾아주기</Text>
+          <Text style={style.board}>{boardName}</Text>
           <TextInput style={style.title} placeholder="제목"></TextInput>
           <View style={style.horizontalLine}></View>
           <TextInput style={style.content} multiline={true} placeholder="내용"></TextInput>
@@ -60,4 +64,4 @@ const style = StyleSheet.create({
         textAlignVertical: 'top',
         padding: 13
     }
-})
+});
