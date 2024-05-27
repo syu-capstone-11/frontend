@@ -25,20 +25,32 @@ export const App = () => {
             } else {
               iconName = 'questioncircleo';
             }
-            return <Icon name={iconName} size={20} color={color} />;
+            return <Icon name={iconName} size={27} color={color} />;
           },
           tabBarActiveTintColor: 'black',
           tabBarInactiveTintColor: 'lightgrey',
+          tabBarStyle: {height: 64},
+          tabBarLabelStyle: {fontSize: 17},
         })}>
         <Tab.Screen
           name="물건 찾아주기 게시판"
           component={FoundItBoard}
-          options={{tabBarLabel: '물건 찾아주기'}}
+          options={{
+            tabBarLabel: '물건 찾아주기',
+            headerStyle: {backgroundColor: '#92BAF7', height: 62},
+            headerTintColor: '#fff',
+            headerTitleStyle: {fontWeight: 'bold'},
+          }}
         />
         <Tab.Screen
           name="물건 찾기 게시판"
           component={LostItemBoard}
-          options={{tabBarLabel: '물건 찾기'}}
+          options={{
+            tabBarLabel: '물건 찾기',
+            headerStyle: {backgroundColor: '#92BAF7', height: 62},
+            headerTintColor: '#fff',
+            headerTitleStyle: {fontWeight: 'bold'},
+          }}
         />
       </Tab.Navigator>
     </NavigationContainer>
