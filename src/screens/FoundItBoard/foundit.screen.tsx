@@ -64,7 +64,7 @@ const DATA: Post[] = [
   {
     id: '3',
     title: '다니엘관 402호에',
-    content: '검정색 지갑 주웠는데 잃어버리신분 댓글부탁드립니다.',
+    content: '검정색 지갑 주웠는데 잃어버리신분?',
     date: '2024-05-25',
     comments: 2,
   },
@@ -149,7 +149,7 @@ export const FoundItBoard = () => {
                 <Text>완료</Text>
               </TouchableOpacity>
             </View>
-            <Write boardName='찾아주기' />
+            <Write boardName="찾아주기" />
           </View>
         </View>
       </Modal>
