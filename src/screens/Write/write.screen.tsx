@@ -1,5 +1,5 @@
 import React, { useState, forwardRef, useImperativeHandle } from 'react';
-import { Text, TextInput, View, StyleSheet } from 'react-native';
+import { Text, TextInput, View, StyleSheet, KeyboardAvoidingView, Platform } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 
 interface WriteProps {
@@ -40,43 +40,49 @@ export const Write = forwardRef<any, WriteProps>(({ boardName, onAddPost }, ref)
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.board}>{boardName}</Text>
-      <TextInput 
-        style={styles.title} 
-        placeholder="제목"
-        value={title}
-        onChangeText={handleTitleChange}
-      />
-      <View style={styles.horizontalLine}></View>
-      <TextInput 
-        style={styles.content} 
-        multiline={true} 
-        placeholder="내용"
-        value={content}
-        onChangeText={handleContentChange}
-      />
-      <MapView 
-        style={styles.map} 
-        initialRegion={{
-          latitude: defaultLocation.latitude,
-          longitude: defaultLocation.longitude,
-          latitudeDelta: 0.005,
-          longitudeDelta: 0.005
-        }}
-        onPress={handleMapPress}
-      >
-        {markerPosition && (
-          <Marker coordinate={markerPosition} />
-        )}
-      </MapView>
-    </View>
+    <KeyboardAvoidingView
+      style={{ flex: 1 }}
+      behavior={Platform.OS === 'android' ? 'height' : undefined}
+    >
+      <View style={styles.container}>
+        <Text style={styles.board}>{boardName}</Text>
+        <TextInput 
+          style={styles.title} 
+          placeholder="제목"
+          value={title}
+          onChangeText={handleTitleChange}
+        />
+        <View style={styles.horizontalLine}></View>
+        <TextInput 
+          style={styles.content} 
+          multiline={true} 
+          placeholder="내용"
+          value={content}
+          onChangeText={handleContentChange}
+        />
+        <MapView 
+          style={styles.map} 
+          initialRegion={{
+            latitude: defaultLocation.latitude,
+            longitude: defaultLocation.longitude,
+            latitudeDelta: 0.005,
+            longitudeDelta: 0.005
+          }}
+          onPress={handleMapPress}
+        >
+          {markerPosition && (
+            <Marker coordinate={markerPosition} />
+          )}
+        </MapView>
+      </View>
+    </KeyboardAvoidingView>
   );
 });
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 0
+    marginTop: 0,
+    flex: 1
   },
   board: {
     marginTop: 30,
@@ -110,8 +116,6 @@ const styles = StyleSheet.create({
   map: {
     marginTop: 20,
     marginLeft: 3,
-    borderWidth: 1,
-    borderColor: 'lightgrey',
     width: '98%',
     height: '45%',
     textAlignVertical: 'top',
