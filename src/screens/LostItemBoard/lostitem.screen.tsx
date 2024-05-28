@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, {useState, useRef} from 'react';
 import {
   View,
   Text,
@@ -8,7 +8,7 @@ import {
   FlatList,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
-import { Write } from '../Write';
+import {Write} from '../Write';
 
 interface Post {
   id: string;
@@ -16,7 +16,7 @@ interface Post {
   content: string;
   date: string;
   comments: number;
-  location: { latitude: number, longitude: number } | null;
+  location: {latitude: number; longitude: number} | null;
 }
 
 const initialData: Post[] = [
@@ -102,7 +102,7 @@ interface ItemProps {
   comments: number;
 }
 
-const Item: React.FC<ItemProps> = ({ title, content, date, comments }) => (
+const Item: React.FC<ItemProps> = ({title, content, date, comments}) => (
   <View style={styles.item}>
     <Text style={styles.title}>{title}</Text>
     <Text style={styles.content}>{content}</Text>
@@ -122,7 +122,11 @@ export const LostItemBoard = () => {
     setModalVisible(true);
   };
 
-  const handleAddPost = (title: string, content: string, location: { latitude: number, longitude: number } | null) => {
+  const handleAddPost = (
+    title: string,
+    content: string,
+    location: {latitude: number; longitude: number} | null,
+  ) => {
     const newPost: Post = {
       id: (data.length + 1).toString(), // id 추가
       title,
@@ -131,32 +135,32 @@ export const LostItemBoard = () => {
       comments: 0,
       location,
     };
-    setData([newPost, ...data]);  // data 배열에 새로운 게시물 추가
+    setData([newPost, ...data]); // data 배열에 새로운 게시물 추가
     setModalVisible(false);
-  
+
     // 데이터를 백엔드로 전달
     // sendToBackend(newPost); // newPost에 id 포함
   };
-  
-// 데이터를 백엔드로 전달하는 코드  
-//  const sendToBackend = async (postData: Post) => {
-//    try {
-//      const response = await fetch('https://your-backend-endpoint.com/posts', {
-//        method: 'POST',
-//        headers: {
-//          'Content-Type': 'application/json',
-//        },
-//        body: JSON.stringify(postData),
-//      });
-//      if (!response.ok) {
-//        throw new Error('Network response was not ok');
-//      }
-//      const responseData = await response.json();
-//      console.log('Data sent to backend:', responseData);
-//    } catch (error) {
-//      console.error('Error sending data to backend:', error);
-//    }
-//  };
+
+  // 데이터를 백엔드로 전달하는 코드
+  //  const sendToBackend = async (postData: Post) => {
+  //    try {
+  //      const response = await fetch('https://your-backend-endpoint.com/posts', {
+  //        method: 'POST',
+  //        headers: {
+  //          'Content-Type': 'application/json',
+  //        },
+  //        body: JSON.stringify(postData),
+  //      });
+  //      if (!response.ok) {
+  //        throw new Error('Network response was not ok');
+  //      }
+  //      const responseData = await response.json();
+  //      console.log('Data sent to backend:', responseData);
+  //    } catch (error) {
+  //      console.error('Error sending data to backend:', error);
+  //    }
+  //  };
 
   const handleCompletePress = () => {
     if (writeComponentRef.current) {
@@ -168,7 +172,7 @@ export const LostItemBoard = () => {
     <View style={styles.container}>
       <FlatList
         data={data}
-        renderItem={({ item }) => (
+        renderItem={({item}) => (
           <Item
             title={item.title}
             content={item.content}
@@ -176,7 +180,7 @@ export const LostItemBoard = () => {
             comments={item.comments}
           />
         )}
-        keyExtractor={(item) => item.id}
+        keyExtractor={item => item.id}
       />
       <TouchableOpacity style={styles.plus} onPress={handleIconPress}>
         <Icon name="pluscircleo" size={45} color="#000" />
@@ -187,23 +191,20 @@ export const LostItemBoard = () => {
         visible={modalVisible}
         onRequestClose={() => {
           setModalVisible(false);
-        }}
-      >
+        }}>
         <View style={styles.modalContainer}>
           <View style={styles.modalContent}>
             <View style={styles.writeContainer}>
               <TouchableOpacity
                 onPress={() => setModalVisible(false)}
-                style={styles.arrowIcon}
-              >
+                style={styles.arrowIcon}>
                 <Icon name="arrowleft" size={25} color="black" />
               </TouchableOpacity>
               <Text style={styles.write}>글쓰기</Text>
               <TouchableOpacity
                 style={styles.complete}
-                onPress={handleCompletePress}
-              >
-                <Text>완료</Text>
+                onPress={handleCompletePress}>
+                <Text style={styles.btnText}>완료</Text>
               </TouchableOpacity>
             </View>
             <Write
@@ -279,12 +280,20 @@ const styles = StyleSheet.create({
   },
   complete: {
     position: 'absolute',
-    top: 9,
+    top: 1,
+    height: 40,
     right: 8,
     zIndex: 1,
     borderWidth: 1,
+    borderColor: 'white',
     borderRadius: 5,
     paddingHorizontal: 10,
     paddingVertical: 5,
+    backgroundColor: '#92BAF7',
+  },
+  btnText: {
+    fontSize: 17,
+    fontWeight: 'bold',
+    color: 'white',
   },
 });
