@@ -1,8 +1,10 @@
 import React from 'react';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {NavigationContainer} from '@react-navigation/native';
+import { View, Text, StyleSheet } from 'react-native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { NavigationContainer } from '@react-navigation/native';
 import {FoundItBoard} from './screens/FoundItBoard';
 import {LostItemBoard} from './screens/LostItemBoard';
+import {MainScreen} from './screens/Main';
 import Icon from 'react-native-vector-icons/AntDesign';
 
 // 네비게이션 스택 생성
@@ -13,15 +15,17 @@ export const App = () => {
   return (
     <NavigationContainer>
       <Tab.Navigator
-        initialRouteName="물건 찾아주기 게시판"
-        screenOptions={({route}) => ({
-          tabBarIcon: ({color}) => {
+        initialRouteName="MainScreen"
+        screenOptions={({ route }) => ({
+          tabBarIcon: ({ color }) => {
             let iconName;
 
             if (route.name === '물건 찾아주기 게시판') {
               iconName = 'find';
             } else if (route.name === '물건 찾기 게시판') {
               iconName = 'search1';
+            } else if (route.name === 'MainScreen') {
+              iconName = 'home';
             } else {
               iconName = 'questioncircleo';
             }
@@ -29,17 +33,26 @@ export const App = () => {
           },
           tabBarActiveTintColor: 'black',
           tabBarInactiveTintColor: 'lightgrey',
-          tabBarStyle: {height: 64},
-          tabBarLabelStyle: {fontSize: 17},
-        })}>
+          tabBarStyle: { height: 64 },
+          tabBarLabelStyle: { fontSize: 17 },
+        })}
+      >
+        <Tab.Screen
+          name="MainScreen"
+          component={MainScreen}
+          options={{
+            headerShown: false,
+            tabBarButton: () => null, // 하단 네비게이션 바에 표시되지 않도록 함
+          }}
+        />
         <Tab.Screen
           name="물건 찾아주기 게시판"
           component={FoundItBoard}
           options={{
             tabBarLabel: '물건 찾아주기',
-            headerStyle: {backgroundColor: '#92BAF7', height: 62},
+            headerStyle: { backgroundColor: '#92BAF7', height: 62 },
             headerTintColor: '#fff',
-            headerTitleStyle: {fontWeight: 'bold'},
+            headerTitleStyle: { fontWeight: 'bold' },
           }}
         />
         <Tab.Screen
@@ -47,12 +60,18 @@ export const App = () => {
           component={LostItemBoard}
           options={{
             tabBarLabel: '물건 찾기',
-            headerStyle: {backgroundColor: '#92BAF7', height: 62},
+            headerStyle: { backgroundColor: '#92BAF7', height: 62 },
             headerTintColor: '#fff',
-            headerTitleStyle: {fontWeight: 'bold'},
+            headerTitleStyle: { fontWeight: 'bold' },
           }}
         />
       </Tab.Navigator>
     </NavigationContainer>
   );
 };
+
+const styles = StyleSheet.create({
+  mainContainer: {
+    flex: 1,
+  },
+});
