@@ -36,7 +36,6 @@ const initialData: Post[] = [
     comments: 3,
     location: null,
   },
-  // 더미 데이터에 location 필드 추가
   {
     id: '7',
     title: '음악관 3층에서 애플펜슬 주웠습니다.',
