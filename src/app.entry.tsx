@@ -1,7 +1,7 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { NavigationContainer } from '@react-navigation/native';
+import {TouchableOpacity, View} from 'react-native';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {NavigationContainer} from '@react-navigation/native';
 import {FoundItBoard} from './screens/FoundItBoard';
 import {LostItemBoard} from './screens/LostItemBoard';
 import {MainScreen} from './screens/Main';
@@ -16,8 +16,8 @@ export const App = () => {
     <NavigationContainer>
       <Tab.Navigator
         initialRouteName="MainScreen"
-        screenOptions={({ route }) => ({
-          tabBarIcon: ({ color }) => {
+        screenOptions={({route}) => ({
+          tabBarIcon: ({color}) => {
             let iconName;
 
             if (route.name === '물건 찾아주기 게시판') {
@@ -33,10 +33,9 @@ export const App = () => {
           },
           tabBarActiveTintColor: 'black',
           tabBarInactiveTintColor: 'lightgrey',
-          tabBarStyle: { height: 64 },
-          tabBarLabelStyle: { fontSize: 17 },
-        })}
-      >
+          tabBarStyle: {height: 68},
+          tabBarLabelStyle: {fontSize: 17},
+        })}>
         <Tab.Screen
           name="MainScreen"
           component={MainScreen}
@@ -48,30 +47,38 @@ export const App = () => {
         <Tab.Screen
           name="물건 찾아주기 게시판"
           component={FoundItBoard}
-          options={{
+          options={({navigation}) => ({
             tabBarLabel: '물건 찾아주기',
-            headerStyle: { backgroundColor: '#92BAF7', height: 62 },
+            headerStyle: {backgroundColor: '#92BAF7', height: 62},
             headerTintColor: '#fff',
-            headerTitleStyle: { fontWeight: 'bold' },
-          }}
+            headerTitleStyle: {fontWeight: 'bold'},
+            headerLeft: () => (
+              <View style={{paddingLeft: 17, paddingTop: 5.5}}>
+                <TouchableOpacity onPress={() => navigation.goBack()}>
+                  <Icon name="arrowleft" size={30} color="white" />
+                </TouchableOpacity>
+              </View>
+            ),
+          })}
         />
         <Tab.Screen
           name="물건 찾기 게시판"
           component={LostItemBoard}
-          options={{
+          options={({navigation}) => ({
             tabBarLabel: '물건 찾기',
-            headerStyle: { backgroundColor: '#92BAF7', height: 62 },
+            headerStyle: {backgroundColor: '#92BAF7', height: 62},
             headerTintColor: '#fff',
-            headerTitleStyle: { fontWeight: 'bold' },
-          }}
+            headerTitleStyle: {fontWeight: 'bold'},
+            headerLeft: () => (
+              <View style={{paddingLeft: 17, paddingTop: 5.5}}>
+                <TouchableOpacity onPress={() => navigation.goBack()}>
+                  <Icon name="arrowleft" size={30} color="white" />
+                </TouchableOpacity>
+              </View>
+            ),
+          })}
         />
       </Tab.Navigator>
     </NavigationContainer>
   );
 };
-
-const styles = StyleSheet.create({
-  mainContainer: {
-    flex: 1,
-  },
-});

@@ -1,6 +1,6 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
+import {View, Text, StyleSheet} from 'react-native';
+import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 
 export const MainScreen = () => {
   return (
@@ -16,8 +16,7 @@ export const MainScreen = () => {
           longitude: 127.106351,
           latitudeDelta: 0.005,
           longitudeDelta: 0.005,
-        }}
-      >
+        }}>
         <Marker
           coordinate={{
             latitude: 37.643587,
@@ -39,13 +38,13 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   header: {
-    height: 60,
+    height: 62,
     backgroundColor: '#92BAF7',
     justifyContent: 'center',
     alignItems: 'center',
   },
   headerText: {
-    fontSize: 20,
+    fontSize: 25,
     fontWeight: 'bold',
     color: '#fff',
   },
