@@ -9,6 +9,12 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 import {Write} from '../Write';
+import {PostDetails} from '../PostDetails';
+import {
+  useNavigation,
+  NavigationProp,
+  ParamListBase,
+} from '@react-navigation/native';
 
 interface Post {
   id: string;
@@ -99,16 +105,25 @@ interface ItemProps {
   content: string;
   date: string;
   comments: number;
+  onPress: () => void;
 }
 
-const Item: React.FC<ItemProps> = ({title, content, date, comments}) => (
-  <View style={styles.item}>
-    <Text style={styles.title}>{title}</Text>
-    <Text style={styles.content}>{content}</Text>
-    <Text style={styles.info}>
-      {date} | 댓글 {comments}
-    </Text>
-  </View>
+const Item: React.FC<ItemProps> = ({
+  title,
+  content,
+  date,
+  comments,
+  onPress,
+}) => (
+  <TouchableOpacity onPress={onPress}>
+    <View style={styles.item}>
+      <Text style={styles.title}>{title}</Text>
+      <Text style={styles.content}>{content}</Text>
+      <Text style={styles.info}>
+        {date} | 댓글 {comments}
+      </Text>
+    </View>
+  </TouchableOpacity>
 );
 
 export const FoundItBoard = () => {
@@ -116,6 +131,7 @@ export const FoundItBoard = () => {
   const [modalVisible, setModalVisible] = useState(false);
 
   const writeComponentRef = useRef<any>(null);
+  const navigation = useNavigation<NavigationProp<ParamListBase>>();
 
   const handleIconPress = () => {
     setModalVisible(true);
@@ -177,6 +193,7 @@ export const FoundItBoard = () => {
             content={item.content}
             date={item.date}
             comments={item.comments}
+            onPress={() => navigation.navigate('PostDetails', {post: item})}
           />
         )}
         keyExtractor={item => item.id}

@@ -6,9 +6,76 @@ import {FoundItBoard} from './screens/FoundItBoard';
 import {LostItemBoard} from './screens/LostItemBoard';
 import {MainScreen} from './screens/Main';
 import Icon from 'react-native-vector-icons/AntDesign';
+import {PostDetails} from './screens/PostDetails';
+import {createStackNavigator} from '@react-navigation/stack';
 
 // 네비게이션 스택 생성
 const Tab = createBottomTabNavigator();
+const Stack = createStackNavigator();
+
+const FoundItStack = () => (
+  <Stack.Navigator>
+    <Stack.Screen
+      name="FoundItBoard"
+      component={FoundItBoard}
+      options={({navigation}) => ({
+        title: '물건 찾아주기',
+        headerStyle: {backgroundColor: '#92BAF7', height: 62},
+        headerTintColor: '#fff',
+        headerTitleStyle: {fontWeight: 'bold'},
+        headerLeft: () => (
+          <View style={{paddingLeft: 17, paddingTop: 5.5}}>
+            <TouchableOpacity onPress={() => navigation.goBack()}>
+              <Icon name="arrowleft" size={30} color="white" />
+            </TouchableOpacity>
+          </View>
+        ),
+      })}
+    />
+    <Stack.Screen
+      name="PostDetail"
+      component={PostDetails}
+      options={{
+        title: '글자세히 보기',
+        headerStyle: {backgroundColor: '#92BAF7', height: 62},
+        headerTintColor: '#fff',
+        headerTitleStyle: {fontWeight: 'bold'},
+      }}
+    />
+  </Stack.Navigator>
+);
+
+const LostItemStack = () => (
+  <Stack.Navigator>
+    <Stack.Screen
+      name="LostItemBoard"
+      component={LostItemBoard}
+      options={({navigation}) => ({
+        title: '물건 찾기',
+        headerStyle: {backgroundColor: '#92BAF7', height: 62},
+        headerTintColor: '#fff',
+        headerTitleStyle: {fontWeight: 'bold'},
+        headerLeft: () => (
+          <View style={{paddingLeft: 17, paddingTop: 5.5}}>
+            <TouchableOpacity onPress={() => navigation.goBack()}>
+              <Icon name="arrowleft" size={30} color="white" />
+            </TouchableOpacity>
+          </View>
+        ),
+      })}
+    />
+    <Stack.Screen
+      name="PostDetail"
+      component={PostDetails}
+      options={{
+        title: '글자세히 보기',
+        headerStyle: {backgroundColor: '#92BAF7', height: 62},
+        headerTintColor: '#fff',
+        headerTitleStyle: {fontWeight: 'bold'},
+      }}
+    />
+  </Stack.Navigator>
+);
 
 // 네비게이션 라우팅, 각종 설정 등 이 파일에서 여러 화면을 관리
 export const App = () => {
@@ -50,40 +117,18 @@ export const App = () => {
           }}
         />
         <Tab.Screen
-          name="찾아주기 게시판"
-          component={FoundItBoard}
-          options={({navigation}) => ({
+          name="물건 찾아주기 게시판"
+          component={FoundItStack}
+          options={{
             tabBarLabel: '물건 찾아주기',
-            headerStyle: {backgroundColor: '#92BAF7', height: 62},
-            headerTintColor: '#fff',
-            headerTitleStyle: {fontWeight: 'bold'},
-            headerTitleAlign: 'center',
-            headerLeft: () => (
-              <View style={{paddingLeft: 17, paddingTop: 5.5}}>
-                <TouchableOpacity onPress={() => navigation.goBack()}>
-                  <Icon name="arrowleft" size={30} color="white" />
-                </TouchableOpacity>
-              </View>
-            ),
-          })}
+          }}
         />
         <Tab.Screen
-          name="찾기 게시판"
-          component={LostItemBoard}
-          options={({navigation}) => ({
+          name="물건 찾기 게시판"
+          component={LostItemStack}
+          options={{
             tabBarLabel: '물건 찾기',
-            headerStyle: {backgroundColor: '#92BAF7', height: 62},
-            headerTintColor: '#fff',
-            headerTitleStyle: {fontWeight: 'bold'},
-            headerTitleAlign: 'center',
-            headerLeft: () => (
-              <View style={{paddingLeft: 17, paddingTop: 5.5}}>
-                <TouchableOpacity onPress={() => navigation.goBack()}>
-                  <Icon name="arrowleft" size={30} color="white" />
-                </TouchableOpacity>
-              </View>
-            ),
-          })}
+          }}
         />
       </Tab.Navigator>
     </NavigationContainer>
